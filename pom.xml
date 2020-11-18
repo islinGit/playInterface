@@ -70,6 +70,17 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>demo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency >
+            <groupId >javax.mail </groupId >
+            <artifactId >mail </artifactId >
+            <version >1.4.7 </version >
+        </dependency >
     </dependencies>
 
     <build>

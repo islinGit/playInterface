@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @Validated
 @RestController
 @Api(value = "/", description = "参数配置swagger-ui")
-@RequestMapping("/api")
+@RequestMapping("")
 public class SimpleInterface {
 
     public int count = 0;
