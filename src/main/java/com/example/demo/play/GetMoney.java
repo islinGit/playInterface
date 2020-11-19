@@ -1,6 +1,5 @@
 package com.example.demo.play;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;

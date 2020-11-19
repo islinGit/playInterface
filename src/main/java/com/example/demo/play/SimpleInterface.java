@@ -65,7 +65,6 @@ public class SimpleInterface {
 
     @GetMapping("/getUser")
     public ResultVO<User> getUser() {
-        System.out.println("1111");
         User user = new User();
         user.setUsername("lin");
         user.setAccount("12345678");

@@ -14,22 +14,25 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import java.util.Date;
 import java.util.Properties;
+import java.util.Random;
 
 @Validated
 @RestController
 @Api(value = "/",description = "发送邮件")
 @RequestMapping("")
 public class SentEmail {
-
+    User user=new User();
     @RequestMapping(value = "/sentMsg",method = RequestMethod.POST)
     @ApiOperation(value = "发送邮件",httpMethod = "POST")
-    public void sentMsg(@RequestBody EmailUesr e){
-        String username=e.username;
-        new SentEmail().sentEmail(username);
+    public String sentMsg(@RequestBody EmailUesr E){
+        new SentEmail().sentEmail(E.username);
+        user.setEmail(E.username);
+        return new ResultVO<>(user).getMsg();
     }
 
-    public void sentEmail(String username)  {
+    public String sentEmail(String username)  {
         try {
             // 创建Properties 类用于记录邮箱的一些属性
             Properties props = new Properties();
@@ -67,7 +70,7 @@ public class SentEmail {
             message.setRecipient(RecipientType.TO, to);
 
             // 设置邮件标题
-            message.setSubject("尝试");
+            message.setSubject("验证码是："+ new SentEmail().getCode());
 
             // 设置邮件的内容体
             message.setContent("哈哈哈哈", "text/html;charset=UTF-8");
@@ -75,9 +78,23 @@ public class SentEmail {
             // 最后当然就是发送邮件啦
             Transport.send(message);
 
+            return "发送成功";
         } catch (Exception e){
             e.printStackTrace();
         }
+        return "失败";
+    }
 
+    public String getCode(){
+        String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb=new StringBuilder(4);
+        for(int i=0;i<4;i++)
+        {
+            char ch=str.charAt(new Random().nextInt(str.length()));
+            sb.append(ch);
+
+        }
+        String result=sb.toString();
+        return result;
     }
 }
